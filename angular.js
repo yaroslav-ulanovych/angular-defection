@@ -12476,13 +12476,14 @@ function classDirective(name, selector) {
   return ngDirective(function(scope, element, attr) {
     var oldVal = undefined;
 
-    scope.$watch(attr[name], ngClassWatchAction, true);
+    attr.$observe('ngClass', function(v) {
+      scope.$watch(v, ngClassWatchAction, true);
+    });
 
     attr.$observe('class', function(value) {
       var ngClass = scope.$eval(attr[name]);
       ngClassWatchAction(ngClass, ngClass);
     });
-
 
     if (name !== 'ngClass') {
       scope.$watch('$index', function($index, old$index) {
