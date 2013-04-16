@@ -1,0 +1,12 @@
+<form class="form-horizontal" name="form">
+	<div class="control-group" ng-repeat="param in params" ng-class="{ error : form.{{param.id}}ctrl.$invalid }">
+		<label class="control-label">{{param.id}} {{param.value}}</label>
+		<div class="controls" ng-switch on="param.type">
+			<div ng-switch-when="string">
+				<input name="{{param.id}}ctrl" type="text" ng-model="param.value" required>
+				<span class="help-inline" ng-show="form.{{param.id}}ctrl.$invalid">required</span>
+			</div>
+			<!-- other types missing -->
+		</div>
+	</div>
+</form>
