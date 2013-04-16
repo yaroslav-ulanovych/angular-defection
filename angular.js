@@ -13708,11 +13708,12 @@ var ngRepeatDirective = ngDirective({
  */
 //TODO(misko): refactor to remove element from the DOM
 var ngShowDirective = ngDirective(function(scope, element, attr){
-  scope.$watch(attr.ngShow, function ngShowWatchAction(value){
-    element.css('display', toBoolean(value) ? '' : 'none');
+  attr.$observe('ngShow', function(v) {
+    scope.$watch(v, function ngShowWatchAction(value){
+      element.css('display', toBoolean(value) ? '' : 'none');
+    });
   });
 });
-
 
 /**
  * @ngdoc directive
