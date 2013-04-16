@@ -12134,7 +12134,13 @@ var ngModelDirective = function() {
       var modelCtrl = ctrls[0],
           formCtrl = ctrls[1] || nullFormCtrl;
 
-      formCtrl.$addControl(modelCtrl);
+      attr.$observe('name', function(value) {
+        if (modelCtrl.$name) {
+            formCtrl.$removeControl(modelCtrl);
+        }
+        modelCtrl.$name = value;
+        formCtrl.$addControl(modelCtrl);
+      });
 
       element.bind('$destroy', function() {
         formCtrl.$removeControl(modelCtrl);
